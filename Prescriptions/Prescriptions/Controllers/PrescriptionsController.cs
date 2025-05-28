@@ -1,14 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Prescriptions.Models.DTOs;
+using Prescriptions.Services;
 
 namespace Prescriptions.Controllers;
 
-public class PrescriptionsController : ControllerBase
+public class PrescriptionsController(IPrescriptionService service) : ControllerBase
 {
 
     [HttpPost]
-    public async Task<IActionResult> AddPrescription(PrescriptionCreateRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> AddPrescription(PrescriptionPostDto request, CancellationToken cancellationToken)
     {
+        service.AddPrescriptionAsync(request, cancellationToken);
         return Ok();
     }
     

@@ -1,6 +1,6 @@
 namespace Prescriptions.Models.DTOs;
 
-public class PrescriptionCreateRequest
+public class PatientGetDto
 {
     
 }
