@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Prescriptions.DAL;
 
@@ -11,9 +12,11 @@ using Prescriptions.DAL;
 namespace Prescriptions.Migrations
 {
     [DbContext(typeof(PrescriptionsDbContext))]
-    partial class PrescriptionsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250528190404_AddedPrescriptionsTable")]
+    partial class AddedPrescriptionsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,29 +136,6 @@ namespace Prescriptions.Migrations
                     b.ToTable("Prescriptions");
                 });
 
-            modelBuilder.Entity("Prescriptions.Models.PrescriptionMedicament", b =>
-                {
-                    b.Property<int>("IdMedicament")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdPrescription")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Details")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("Dose")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdMedicament", "IdPrescription");
-
-                    b.HasIndex("IdPrescription");
-
-                    b.ToTable("Prescription_Medicament");
-                });
-
             modelBuilder.Entity("Prescriptions.Models.Prescription", b =>
                 {
                     b.HasOne("Prescriptions.Models.Doctor", "Doctor")
@@ -173,25 +153,6 @@ namespace Prescriptions.Migrations
                     b.Navigation("Doctor");
 
                     b.Navigation("Patient");
-                });
-
-            modelBuilder.Entity("Prescriptions.Models.PrescriptionMedicament", b =>
-                {
-                    b.HasOne("Prescriptions.Models.Medicament", "Medicament")
-                        .WithMany()
-                        .HasForeignKey("IdMedicament")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Prescriptions.Models.Prescription", "Prescription")
-                        .WithMany()
-                        .HasForeignKey("IdPrescription")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Medicament");
-
-                    b.Navigation("Prescription");
                 });
 #pragma warning restore 612, 618
         }
