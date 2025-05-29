@@ -2,15 +2,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Prescriptions.Models;
 
-public class Patient(int idPatient, string firstName, string lastName, DateTime birthDate)
+public class Patient
 {
     [Key]
-    public int IdPatient { get; set; } = idPatient;
+    public int IdPatient { get; set; }
     [MaxLength(100)]
-    public string FirstName { get; set; } = firstName;
+    public string FirstName { get; set; } = null!;
     [MaxLength(100)]
-    public string LastName { get; set; } = lastName;
+    public string LastName { get; set; } = null!;
 
-    public DateTime BirthDate { get; set; } = birthDate;
+    public DateTime BirthDate { get; set; }
     public virtual ICollection<Prescription> Prescriptions { get; set; } = null!;
 }

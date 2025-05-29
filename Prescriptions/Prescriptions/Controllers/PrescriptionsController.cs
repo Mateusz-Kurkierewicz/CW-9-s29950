@@ -18,6 +18,10 @@ public class PrescriptionsController(IPrescriptionService service) : ControllerB
         }
         catch (NotFoundException e)
         {
+            return NotFound(e.Message);
+        }
+        catch (BadRequestException e)
+        {
             return BadRequest(e.Message);
         }
     }

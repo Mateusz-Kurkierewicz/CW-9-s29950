@@ -6,7 +6,7 @@ namespace Prescriptions.Models;
 
 [Table("Prescription_Medicament")]
 [PrimaryKey(nameof(IdMedicament), nameof(IdPrescription))]
-public class PrescriptionMedicament(int idMedicament, int idPrescription, int dose, string details)
+public class PrescriptionMedicament(int idMedicament, int idPrescription, int? dose, string details)
 {
     public int IdMedicament { get; set; } = idMedicament;
     public int IdPrescription { get; set; } = idPrescription;

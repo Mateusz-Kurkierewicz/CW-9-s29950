@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Prescriptions.Models;
 
-public class Prescription(int idPrescription, DateTime date, DateTime dueDate, int idPatient, int idDoctor)
+public class Prescription
 {
     [Key]
-    public int IdPrescription { get; set; } = idPrescription;
-    public DateTime Date { get; set; } = date;
-    public DateTime DueDate { get; set; } = dueDate;
-    public int IdPatient { get; set; } = idPatient;
-    public int IdDoctor { get; set; } = idDoctor;
+    public int IdPrescription { get; set; }
+    public DateTime Date { get; set; }
+    public DateTime DueDate { get; set; }
+    public int IdPatient { get; set; }
+    public int IdDoctor { get; set; }
     [ForeignKey(nameof(IdPatient))] public Patient Patient { get; set; } = null!;
     [ForeignKey(nameof(IdDoctor))]
     public Doctor Doctor { get; set; } = null!;
