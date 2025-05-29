@@ -12,4 +12,5 @@ public class Medicament(int idMedicament, string name, string description, strin
     public string Description { get; set; } = description;
     [MaxLength(100)]
     public string Type { get; set; } = type;
+    public virtual ICollection<PrescriptionMedicament> PrescriptionMedicaments { get; set; } = null!;
 }

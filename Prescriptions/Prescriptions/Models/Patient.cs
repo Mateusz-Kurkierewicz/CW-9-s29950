@@ -12,4 +12,5 @@ public class Patient(int idPatient, string firstName, string lastName, DateTime 
     public string LastName { get; set; } = lastName;
 
     public DateTime BirthDate { get; set; } = birthDate;
+    public virtual ICollection<Prescription> Prescriptions { get; set; } = null!;
 }

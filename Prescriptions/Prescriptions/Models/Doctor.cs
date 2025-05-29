@@ -13,4 +13,6 @@ public class Doctor(int idDoctor, string firstName, string lastName, string emai
     [EmailAddress]
     [MaxLength(100)]
     public string Email { get; set; } = email;
+
+    public virtual ICollection<Prescription> Prescriptions { get; set; } = null!;
 }
