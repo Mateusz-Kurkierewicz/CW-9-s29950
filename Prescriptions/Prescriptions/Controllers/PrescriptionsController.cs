@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Prescriptions.Exceptions;
 using Prescriptions.Models.DTOs;
 using Prescriptions.Services;
 
@@ -10,8 +11,15 @@ public class PrescriptionsController(IPrescriptionService service) : ControllerB
     [HttpPost]
     public async Task<IActionResult> AddPrescription(PrescriptionPostDto request, CancellationToken cancellationToken)
     {
-        service.AddPrescriptionAsync(request, cancellationToken);
-        return Ok();
+        try
+        {
+            var result = service.AddPrescriptionAsync(request, cancellationToken);
+            return Ok(result);
+        }
+        catch (NotFoundException e)
+        {
+            return BadRequest(e.Message);
+        }
     }
     
 }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Prescriptions.Exceptions;
 using Prescriptions.Services;
 
 namespace Prescriptions.Controllers;
@@ -12,8 +13,15 @@ public class PatientController(IPrescriptionService service) : ControllerBase
     [Route("{firstName}/{lastName}")]
     public async Task<IActionResult> GetPatientPrescriptions(string firstName, string lastName, CancellationToken cancellationToken)
     {
-        var result = await service.GetPatientAsync(firstName, lastName, cancellationToken);
-        return Ok(result);
+        try
+        {
+            var result = await service.GetPatientAsync(firstName, lastName, cancellationToken);
+            return Ok(result);
+        }
+        catch (NotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
     }
     
 }
