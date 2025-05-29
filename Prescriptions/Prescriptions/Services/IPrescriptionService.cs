@@ -4,6 +4,6 @@ namespace Prescriptions.Services;
 
 public interface IPrescriptionService
 {
-    public Task AddPrescriptionAsync(PrescriptionPostDto request, CancellationToken cancellationToken);
-    public Task<PatientGetDto> GetPatientAsync(string firstName, string lastName, CancellationToken cancellationToken);
+    public Task<int> AddPrescriptionAsync(PrescriptionPostDto request, CancellationToken cancellationToken);
+    public Task<PatientGetDto> GetPatientAsync(int id, CancellationToken cancellationToken);
 }

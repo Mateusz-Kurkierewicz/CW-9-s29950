@@ -10,7 +10,7 @@ public class PrescriptionMedicament(int idMedicament, int idPrescription, int do
 {
     public int IdMedicament { get; set; } = idMedicament;
     public int IdPrescription { get; set; } = idPrescription;
-    public int Dose { get; set; } = dose;
+    public int? Dose { get; set; } = dose;
     [MaxLength(100)]
     public string Details { get; set; } = details;
     [ForeignKey(nameof(IdMedicament))]

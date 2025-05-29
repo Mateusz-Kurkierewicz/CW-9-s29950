@@ -1,16 +1,24 @@
+using Microsoft.EntityFrameworkCore;
+using Prescriptions.DAL;
+using Prescriptions.Exceptions;
 using Prescriptions.Models.DTOs;
 
 namespace Prescriptions.Services;
 
-public class OrmService : IPrescriptionService
+public class OrmService(PrescriptionsDbContext data) : IPrescriptionService
 {
-    public Task AddPrescriptionAsync(PrescriptionPostDto request, CancellationToken cancellationToken)
+    public Task<int> AddPrescriptionAsync(PrescriptionPostDto request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    public Task<PatientGetDto> GetPatientAsync(string firstName, string lastName, CancellationToken cancellationToken)
+    public async Task<PatientGetDto> GetPatientAsync(int id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var result = await data.Patients.Select(p => new PatientGetDto
+        {
+
+        }).FirstOrDefaultAsync(s => s.IdPatient == id, cancellationToken);
+        return result ?? throw new NotFoundException($"Nie odnaleziono pacjenta o id: {id}.");
     }
+    
 }

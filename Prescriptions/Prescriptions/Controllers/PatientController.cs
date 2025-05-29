@@ -10,12 +10,12 @@ public class PatientController(IPrescriptionService service) : ControllerBase
 {
 
     [HttpGet]
-    [Route("{firstName}/{lastName}")]
-    public async Task<IActionResult> GetPatientPrescriptions(string firstName, string lastName, CancellationToken cancellationToken)
+    [Route("{id:int}")]
+    public async Task<IActionResult> GetPatientPrescriptions([FromRoute]int id, CancellationToken cancellationToken)
     {
         try
         {
-            var result = await service.GetPatientAsync(firstName, lastName, cancellationToken);
+            var result = await service.GetPatientAsync(id, cancellationToken);
             return Ok(result);
         }
         catch (NotFoundException e)

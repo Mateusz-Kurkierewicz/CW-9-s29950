@@ -9,11 +9,11 @@ public class PrescriptionsController(IPrescriptionService service) : ControllerB
 {
 
     [HttpPost]
-    public async Task<IActionResult> AddPrescription(PrescriptionPostDto request, CancellationToken cancellationToken)
+    public async Task<IActionResult> AddPrescription([FromBody]PrescriptionPostDto request, CancellationToken cancellationToken)
     {
         try
         {
-            var result = service.AddPrescriptionAsync(request, cancellationToken);
+            var result = await service.AddPrescriptionAsync(request, cancellationToken);
             return Ok(result);
         }
         catch (NotFoundException e)
